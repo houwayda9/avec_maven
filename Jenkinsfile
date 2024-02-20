@@ -1,14 +1,25 @@
 pipeline {
     agent any
-
+    triggers {
+        // Configuration du déclenchement du pipeline lorsqu'un push est détecté dans le référentiel Git
+        pollSCM 'H/5 * * * *'
+    }
     stages {
-        stage('Maven') {
+        stage('Récupération du code source') {
             steps {
-                echo 'Hello World'
+                // Cette étape clone le référentiel Git
+                git 'https://github.com/houwayda9/avec_maven'
             }
-        stage('Test') {
+        }
+ 
+        stage('Affichage de la date système') {
             steps {
-                echo 'test'
+                // Cette étape affiche la date système
+                script {
+                    def date = sh(script: 'date', returnStdout: true).trim()
+                    echo "La date système est : ${date}"
+                }
             }
-     }
+        }
+    }
 }
