@@ -7,7 +7,7 @@ pipeline {
       environment {
       registry  = "houwayda/devop_esprit"
       registryCredential = 'dockerHub'
-          dockerImage = ''
+      dockerImage = ''
       }
     dockerImage = docker.build registry + ":$BUILD_NUMBER"
       docker.withRegistry( '' , registryCredential) {
